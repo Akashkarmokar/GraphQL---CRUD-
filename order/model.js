@@ -7,7 +7,7 @@ const {Schema, model } = require('mongoose');
 // Order Schema 
 
 const OrderSchema = new Schema({
-    prdouct_id: {
+    product_id: {
         type: Schema.Types.ObjectId,
         ref:"Product",
         required: true,
@@ -19,10 +19,12 @@ const OrderSchema = new Schema({
     },
     seller_id: {
         type: Schema.Types.ObjectId,
-        ref:"User",
-        required: true,
+        ref:"User"
     },
-    quantity: { type: Number, required: true }
+    quantity: { type: Number, required: true },
+    total_price: { type: Number, required: true},
+    product_unit_price: { type: Number, required: true },
+    status: { type: String, default: 'not_delivered', enum:['not_delivered','delivered']}
     
 },{ timestamps: true });
 

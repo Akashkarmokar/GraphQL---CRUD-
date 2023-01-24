@@ -25,7 +25,8 @@ scaffold.create_product = async(parent,args,context,info)=>{
             product_name,
             product_qty,
             product_buying_price,
-            product_selling_price
+            product_selling_price,
+            product_remaining_qty: product_qty
         });
         await newProduct.save();
         return newProduct;
