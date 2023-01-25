@@ -20,7 +20,6 @@ scaffold.create_order = async(parent,args,context,info)=>{
     let { product_id,buyer_id,qty } = args.order ;
     try{
         const product_details = await Product.findById(product_id);
-        console.log(product_details);
         if( product_details.product_qty >= qty & qty > 0 ){
             /**
              * Now for simplycity I don't use ACID transaction .

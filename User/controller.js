@@ -47,6 +47,41 @@ scaffold.create_user = async (parent,args,context)=>{
     
 }
 
+scaffold.get_sellers = async (parent,args,context)=>{
+    try{
+        const allSellers  = await User.find({type: 'seller'});
+        console.log(allSellers);
+        return allSellers;
+    }catch(err){
+        throw new ApolloError(err)
+    }
+}
+
+
+scaffold.get_customers = async (parent,args,context)=>{
+    try{
+        const allSellers  = await User.find({type: 'buyer'});
+        console.log(allSellers);
+        return allSellers;
+    }catch(err){
+        throw new ApolloError(err)
+    }
+}
+
+scaffold.change_user_status = async (parent,args,context)=>{
+    try {
+        const { user_id, status } = args.statusDetails;
+        const updateData = await User.findOneAndUpdate(
+            { _id: user_id },
+            { is_archive_or_delete: status },
+            { new: true }
+        )
+        console.log(updateData);
+        return updateData;
+    } catch (error) {
+        throw new ApolloError(err);
+    }
+}
 /**
  * Export Module
  */

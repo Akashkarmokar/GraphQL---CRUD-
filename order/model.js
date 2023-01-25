@@ -19,7 +19,7 @@ const OrderSchema = new Schema({
     },
     seller_id: {
         type: Schema.Types.ObjectId,
-        ref:"User"
+        ref:"User",
     },
     quantity: { type: Number, required: true },
     total_price: { type: Number, required: true},

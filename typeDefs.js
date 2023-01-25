@@ -7,9 +7,10 @@ const typeDefs = gql`
         name: String
         type: String
         balance: Int
+        is_archive_or_delete: String
     }
     type Product{
-        id: ID
+        _id: ID
         product_name: String
         product_qty: Int
         product_buying_price: Int
@@ -61,10 +62,28 @@ const typeDefs = gql`
         quantity: Int
     } 
 
+    input ChangeUserStaus{
+        user_id: ID
+        status: String
+    }
+
+    input ChangeProductStaus{
+        product_id: ID
+        status: String
+    }
+    type BestSellingProduct{
+        _id: ID
+        total_selling_count: Int
+        product_details: Product
+    }
+
     type Query {
         get_users: [User]
         get_user(name:String): [User]
+        get_sellers:[User]
+        get_customers:[User]
         get_products: [Product]
+        best_selling_product: BestSellingProduct
     }
 
     type Mutation {
@@ -72,6 +91,8 @@ const typeDefs = gql`
         create_product(product: ProductInput): Product
         create_order(order: OrderInput): Order 
         take_order_by_seller(takenOrderDetails: TakenOrderInput): Inventory
+        change_user_status(statusDetails: ChangeUserStaus): User
+        change_product_status(statusDetails: ChangeProductStaus): Product
     }
 
 `;
