@@ -23,7 +23,7 @@ async function startServer(){
     // Apply Middleware
     apolloServer.applyMiddleware({ 
         app: app,
-        path:'/my_graphQL' 
+        // path:'/my_graphQL' 
     });
 
     // For others route excluding graphQL
