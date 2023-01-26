@@ -20,6 +20,11 @@ scaffold.get_product = async(parent,arags,context,info) =>{
 scaffold.best_selling_product = async (parent,args,context,info)=>{
     const bestSellProduct = await Order.aggregate([
         {
+            $match:{
+                status:'delivered'
+            }
+        },
+        {
             $group: {
                 _id: "$product_id",
                 total_selling_count: { $sum: 1 }
@@ -46,6 +51,7 @@ scaffold.best_selling_product = async (parent,args,context,info)=>{
             $unwind: "$product_details"
          }
     ]);
+    console.log(bestSellProduct)
     let finalResponse = bestSellProduct[0];
     return bestSellProduct[0];
 }
